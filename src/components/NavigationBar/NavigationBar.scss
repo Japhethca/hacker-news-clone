@@ -1,0 +1,44 @@
+@import '../../common/theme';
+
+.nav {
+  background-color: rgb(228, 116, 76);
+  display: flex;
+  align-items: center;
+
+  .nav_menu {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .nav_menu-item {
+    border-left: 1px solid black;
+
+
+    &:first-child {
+      border-left: 0;
+    }
+
+    & a {
+      padding: .6rem;
+      color: #222;
+      text-transform: capitalize;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  .nav-brand {
+    padding-left: .4rem;
+
+    img {
+      height: 1.5rem;
+    }
+  }
+}
+
+
+
+
