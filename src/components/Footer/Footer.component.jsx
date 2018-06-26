@@ -9,8 +9,8 @@ export default () => (
     </span>
     <div>
       <a href="https://github.com/JaphethCA/hacker-news-clone">
-        See code on Github
-      </a>
+See code on Github
+</a>
     </div>
   </footer>
 );
