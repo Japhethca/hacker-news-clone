@@ -32,8 +32,8 @@ module.exports = {
     contentBase: './dist',
     compress: true,
     open: true,
-    index: 'index.html',
-    port: 8000
+    historyApiFallback: true,
+    port: 8000,
   },
   plugins: [
     new HtmlWebPackPlugin({

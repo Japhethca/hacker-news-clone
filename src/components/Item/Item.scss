@@ -1,0 +1,54 @@
+@import '../../common/theme';
+
+$title-color: map-get($primary , black);
+$title-link-hover: darken(map-get($primary, green), 20%);
+$meta-items-color: map-get($primary, grey);
+
+.item {
+  display: flex;
+  padding-top: .6rem;
+  padding-right: .5rem;
+
+  &__meta {
+    color: $meta-items-color;
+    font-size: 1rem;
+  }
+
+  &__link {
+    color: $title-color;
+    font-size: 1.2rem;
+
+    &:hover {
+      color: $title-link-hover;
+    }
+
+    &:visited {
+      color: lighten($title-color, 50%);
+    }
+  }
+
+  &__comments {
+    color: $meta-items-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .hide-btn {
+    color: $meta-items-color;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 1rem;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}

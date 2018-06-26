@@ -1,0 +1,23 @@
+@import '../../common/theme';
+
+.paginator {
+  margin-top: 1rem;
+  padding-left: .6rem;
+
+  a {
+    color: map-get($primary, grey);
+
+    &:hover {
+      color: map-get($primary, black);
+    }
+  }
+
+  &__previous {
+    padding-right: .6rem;
+  }
+
+  &__more {
+    padding-left: .6rem;
+    border-left: 1px solid map-get($primary, grey)
+  }
+}

@@ -4,10 +4,10 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 // components
-import Routes from 'routes';
+import Routes from './Routes';
 
 // others
-import store from 'store';
+import store from './store';
 
 render(
   <Provider store={store}>

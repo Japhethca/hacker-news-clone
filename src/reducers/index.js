@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
+import { topStoriesByIdReducer, itemsReducer } from './items';
 
 export default combineReducers({
-  index: (state={}, action) => ({
-
-  })
+    storyTypes: topStoriesByIdReducer,
+    items: itemsReducer
 });

@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+$primary: (
+  black: #000000,
+  white: #ffff,
+  dark-white: #E8E8E8,
+  green: #85BE39,
+  grey: #6f6f6f
+);
+
+// div, span, ol, ul, header, section, footer {
+
+// }
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    & {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
