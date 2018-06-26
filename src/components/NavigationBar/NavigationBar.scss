@@ -1,40 +1,60 @@
 @import '../../common/theme';
 
+$brand-text-color: map-get($primary, white);
+$nav-bg-color: map-get($primary, black);
+$nav-fg-color: map-get($primary , green);
+$active-link: lighten(map-get($primary, green), 30%);
+
 .nav {
-  background-color: rgb(228, 116, 76);
+  background-color: $nav-bg-color;
   display: flex;
   align-items: center;
 
-  .nav_menu {
+  &__menu {
     display: flex;
+    flex-wrap: wrap;
     list-style-type: none;
     padding: 0;
   }
 
-  .nav_menu-item {
-    border-left: 1px solid black;
+  &__menu-item {
+    border-left: 1px solid $nav-fg-color;
 
 
     &:first-child {
       border-left: 0;
     }
 
-    & a {
+    a {
       padding: .6rem;
-      color: #222;
-      text-transform: capitalize;
+      font-size: 1.3rem;
+      color: $nav-fg-color;
 
       &:hover {
-        color: #fff;
+        color: $active-link;
       }
+    }
+
+    .active__link--color {
+      color: $active-link;
     }
   }
 
-  .nav-brand {
+  &__brand {
+    position: relative;
     padding-left: .4rem;
+    color: $brand-text-color;
+    align-self: center;
+    font-size: 1.5rem;
 
-    img {
-      height: 1.5rem;
+    .nav__logo {
+      color: $brand-text-color;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    & {
+      width: 100%;
     }
   }
 }

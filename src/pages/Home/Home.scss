@@ -1,0 +1,13 @@
+@import '../../common/theme';
+
+$bg-color: map-get($primary, dark-white);
+
+.home--center {
+  width: 100;
+  padding: 2rem;
+  color: darkgreen;
+}
+
+.home--bg-color {
+  background-color: $bg-color;
+}
