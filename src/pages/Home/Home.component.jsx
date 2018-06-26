@@ -20,7 +20,7 @@ export default ({ location }) => {
   return (
     <div>
       <NavigationBar />
-      <div className= "container home--bg-color">
+      <div className="container home--bg-color">
         <Switch>
           <Route path="/new" component={Stories} />
           <Route path="/top" component={Stories} />
