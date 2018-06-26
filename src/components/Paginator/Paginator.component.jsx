@@ -17,7 +17,7 @@ class Paginator extends React.Component {
   componentDidMount() {
     const itemLength = this.props.items ? this.props.items.length : 0;
     const totalPages = Math.floor(itemLength / this.props.limit);
-    console.log(totalPages);
+    // console.log(totalPages);
     this.setState({totalPages});
   }
   render () {

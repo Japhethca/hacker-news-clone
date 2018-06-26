@@ -1,6 +1,6 @@
 // react libraries
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 // styles
 import './Home.scss';
@@ -12,7 +12,11 @@ import Footer from 'components/Footer/Footer.component';
 import Stories from 'pages/Stories/Stories.component';
 
 
-export default () => {
+export default ({ location }) => {
+  if (location.pathname === '/') {
+    return <Redirect to="top" />
+  }
+
   return (
     <div>
       <NavigationBar />
