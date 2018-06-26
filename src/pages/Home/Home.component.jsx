@@ -14,24 +14,24 @@ import Stories from 'pages/Stories/Stories.component';
 
 export default ({ location }) => {
   if (location.pathname === '/') {
-    return <Redirect to="top" />
+    return <Redirect to="top" />;
   }
 
   return (
     <div>
       <NavigationBar />
-      < div className = "container home--bg-color" >
+      <div className= "container home--bg-color">
         <Switch>
-          <Route path="/new" component={Stories}/>
-          <Route path="/top" component={Stories}/>
-          <Route path="/ask" component={Stories}/>
-          <Route path="/show" component={Stories}/>
+          <Route path="/new" component={Stories} />
+          <Route path="/top" component={Stories} />
+          <Route path="/ask" component={Stories} />
+          <Route path="/show" component={Stories} />
           {/* <Route path="/comments" component={Stories}/> */}
-          <Route path="/jobs" component={Stories}/>
-          <Route path="/item/:itemId" component={StoryView}/>
+          <Route path="/jobs" component={Stories} />
+          <Route path="/item/:itemId" component={StoryView} />
         </Switch>
         <Footer />
       </div>
     </div>
-  )
+  );
 };

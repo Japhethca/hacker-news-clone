@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-//styles
+// styles
 import './Paginator.scss';
 
 class Paginator extends React.Component {
@@ -14,20 +14,21 @@ class Paginator extends React.Component {
       previous: 0
     };
   }
+
   componentDidMount() {
     const itemLength = this.props.items ? this.props.items.length : 0;
     const totalPages = Math.floor(itemLength / this.props.limit);
     // console.log(totalPages);
-    this.setState({totalPages});
+    this.setState({ totalPages });
   }
-  render () {
 
+  render() {
     return (
       <div className="paginator">
         <Link
           to={`${this.props.url}?page=`}
           className="paginator__previous"
-          >
+        >
           Previous
         </Link>
         <Link
@@ -37,7 +38,7 @@ class Paginator extends React.Component {
           More
         </Link>
       </div>
-    )
+    );
   }
 }
 
