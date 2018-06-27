@@ -8,4 +8,5 @@ export default {
     beststories: []
   },
   items: {},
+  loader: {}
 };

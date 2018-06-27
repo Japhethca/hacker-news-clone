@@ -1,6 +1,7 @@
 import {
   FETCH_ITEMS,
-  FETCH_SINGLE_ITEM
+  FETCH_SINGLE_ITEM,
+  ISLOADING
 } from '../types';
 
 export const storiesByTypeReducer = (state = {}, action) => {
@@ -10,6 +11,7 @@ export const storiesByTypeReducer = (state = {}, action) => {
         ...state,
         [action.itemType]: [...action.items]
       };
+
     default:
       return state;
   }
@@ -22,6 +24,20 @@ export const itemsReducer = (state = {}, action) => {
         ...state,
         [action.item.id]: action.item
       };
+
+    default:
+      return state;
+  }
+};
+
+export const itemLoaderReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ISLOADING:
+      return {
+        ...state,
+        [action.itemId]: action.status
+      };
+
     default:
       return state;
   }

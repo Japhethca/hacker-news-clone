@@ -2,7 +2,8 @@
   "presets": [
     "react",
     "env",
-    "flow"
+    "flow",
+    "es2015"
   ],
   "plugins": [
     "transform-es2015-destructuring",

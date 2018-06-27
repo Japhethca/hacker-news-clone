@@ -13,11 +13,14 @@ import './Item.scss';
 // actions
 import handleFetchItem from 'actions/itemsAction';
 
+// components
+import Loader from 'common/Loader/Loader';
+
 type Props = {
-  items: any,
   handleFetchItem: any,
   itemId: number,
-  item: any
+  item: any,
+  isloading: boolean
 };
 
 class Item extends React.Component<Props> {
@@ -36,9 +39,9 @@ class Item extends React.Component<Props> {
    * @returns {none} - returns none
    */
   componentDidMount() {
-    const { items, handleFetchItem, itemId } = this.props;
+    const { item, handleFetchItem, itemId } = this.props;
 
-    if (!items) {
+    if (!item.id) {
       handleFetchItem(itemId);
     }
   }
@@ -59,8 +62,8 @@ class Item extends React.Component<Props> {
    * @memberof Item
    */
   render() {
-    const { item } = this.props;
-    if (!item) {
+    const { item, isloading } = this.props;
+    if (!item && !isloading) {
       return (
         <div className="hidden" />
       );
@@ -68,8 +71,12 @@ class Item extends React.Component<Props> {
 
     return (
       <li className="item" id={item.id}>
-        <div className="item__details">
-          {
+        {
+          isloading
+            ? <Loader />
+            : (
+              <div className="item__details">
+                {
             item.url
               ? (
                 <a className="item__link" href={item.url}>
@@ -92,38 +99,41 @@ class Item extends React.Component<Props> {
                 </Link>
               )
           }
-          <div className="item__meta">
-            <span>
-              {`${item.score} `}
-                points by
-              {` ${item.by} `}
-              {moment.unix(item.time).fromNow()}
-            </span>
-            {' | '}
-            <button
-              type="button"
-              className="hide-btn"
-              onClick={this.hideItem}
-            >
-              hide
-            </button>
-            {' | '}
-            <Link
-              className="item__comments"
-              to={`item/${item.id}/comments`}
-            >
-              {item.kids ? item.kids.length : 0}
-              &nbsp;comment(s)
-            </Link>
-          </div>
-        </div>
+                <div className="item__meta">
+                  <span>
+                    {`${item.score} `}
+                    points by
+                    {` ${item.by} `}
+                    {moment.unix(item.time).fromNow()}
+                  </span>
+                  {' | '}
+                  <button
+                    type="button"
+                    className="hide-btn"
+                    onClick={this.hideItem}
+                  >
+                  hide
+                  </button>
+                  {' | '}
+                  <Link
+                    className="item__comments"
+                    to={`item/${item.id}/comments`}
+                  >
+                    {item.kids ? item.kids.length : 0}
+                    &nbsp;comment(s)
+                  </Link>
+                </div>
+              </div>
+            )
+        }
       </li>
     );
   }
 }
 
 const mapStateToProps = (state, { itemId }) => ({
-  item: state.items[itemId] || {}
+  item: state.items[itemId] || {},
+  isloading: state.loader[itemId] || false
 });
 
 export default connect(mapStateToProps, { handleFetchItem })(Item);
