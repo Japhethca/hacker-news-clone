@@ -1,4 +1,4 @@
-@import '../../common/theme';
+@import '../common/theme';
 
 $title-color: map-get($primary , black);
 $title-link-hover: darken(map-get($primary, green), 20%);
@@ -6,12 +6,12 @@ $meta-items-color: map-get($primary, grey);
 
 .item {
   display: flex;
-  padding-top: .6rem;
+  padding-top: .7rem;
   padding-right: .5rem;
 
   &__meta {
     color: $meta-items-color;
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   &__link {
@@ -25,6 +25,10 @@ $meta-items-color: map-get($primary, grey);
     &:visited {
       color: lighten($title-color, 50%);
     }
+  }
+
+  &__link__url {
+    color: $meta-items-color;
   }
 
   &__comments {

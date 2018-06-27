@@ -6,14 +6,16 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import './Home.scss';
 
 // components
-import StoryView from 'components/StoryView/StoryView.component';
-import NavigationBar from 'components/NavigationBar/NavigationBar.component';
-import Footer from 'components/Footer/Footer.component';
-import Stories from 'pages/Stories/Stories.component';
+import StoryView from 'components/StoryView';
+import NavigationBar from 'components/NavigationBar';
+import Footer from 'components/Footer';
+import Stories from 'pages/Stories';
 
-
-export default ({ location }) => {
-  if (location.pathname === '/') {
+type Props = {
+  location: any
+}
+export default ({ location: { pathname } }: Props) => {
+  if (pathname === '/') {
     return <Redirect to="top" />;
   }
 

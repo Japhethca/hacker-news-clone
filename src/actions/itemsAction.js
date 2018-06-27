@@ -1,17 +1,25 @@
 import axios from 'axios';
 
-import { FETCH_SINGLE_ITEM } from '../types';
 import apiURL from 'configs/api';
+import { FETCH_SINGLE_ITEM, ISLOADING } from '../types';
 
-const fetchItem = (item) => ({
+const fetchItem = item => ({
   type: FETCH_SINGLE_ITEM,
   item
 });
 
-export const handleFetchItem = (itemID) => {
-  return dispatch => axios.get(`${apiURL}/item/${itemID}.json`)
-    .then(response => {
+const isLoading = (itemId, status = false) => ({
+  type: ISLOADING,
+  itemId,
+  status
+});
+
+export default itemID => (dispatch) => {
+  dispatch(isLoading(itemID, true));
+  axios.get(`${apiURL}/item/${itemID}.json`)
+    .then((response) => {
+      dispatch(isLoading(itemID));
       dispatch(fetchItem(response.data));
     })
-    .catch(error => console.log(error));
+    .catch(() => dispatch(isLoading(itemID)));
 };

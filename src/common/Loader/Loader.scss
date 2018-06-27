@@ -1,0 +1,15 @@
+@import '../theme';
+@import 'loaders.css/src/animations/line-scale.scss';
+
+$primary-color: map-get($primary, black);
+
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  display: block;
+}
+
+.loader--color {
+  color: map-get($primary, black);
+}

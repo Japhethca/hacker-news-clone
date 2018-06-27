@@ -1,7 +1,12 @@
 import { combineReducers } from 'redux';
-import { topStoriesByIdReducer, itemsReducer } from './items';
+import {
+  storiesByTypeReducer,
+  itemsReducer,
+  itemLoaderReducer
+} from './items';
 
 export default combineReducers({
-    storyTypes: topStoriesByIdReducer,
-    items: itemsReducer
+  storyTypes: storiesByTypeReducer,
+  items: itemsReducer,
+  loader: itemLoaderReducer
 });

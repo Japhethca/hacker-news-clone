@@ -1,1 +1,1 @@
-export default 'https://hacker-news.firebaseio.com/v0'
+export default 'https://hacker-news.firebaseio.com/v0';
