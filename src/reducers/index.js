@@ -2,11 +2,13 @@ import { combineReducers } from 'redux';
 import {
   storiesByTypeReducer,
   itemsReducer,
-  itemLoaderReducer
+  itemLoaderReducer,
+  paginationReducer
 } from './items';
 
 export default combineReducers({
   storyTypes: storiesByTypeReducer,
   items: itemsReducer,
-  loader: itemLoaderReducer
+  loader: itemLoaderReducer,
+  pagination: paginationReducer
 });
