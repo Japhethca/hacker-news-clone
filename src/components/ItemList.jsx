@@ -2,15 +2,19 @@
 import React from 'react';
 
 // components
-import Item from '../Item/Item.component'
+import Item from './Item';
 
 // styles
 import './ItemList.scss';
 
-const ItemList = ({ items }) => (
+type Props = {
+  items: any[]
+};
+
+const ItemList = ({ items }: Props) => (
   <ul className="item__list">
     {items && items.map((itemId, index) => (
-        <Item number={index + 1} itemId={itemId} key={itemId}/>
+      <Item number={index + 1} itemId={itemId} key={itemId} />
     ))}
   </ul>
 );

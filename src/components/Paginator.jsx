@@ -1,11 +1,25 @@
 // react libraries
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 // styles
 import './Paginator.scss';
 
-class Paginator extends React.Component {
+
+type Props = {
+  items: any[],
+  limit: number,
+  url: string
+}
+
+type State = {
+  totalPages: number,
+  more: number,
+  previous: number
+}
+
+
+class Paginator extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,23 +30,25 @@ class Paginator extends React.Component {
   }
 
   componentDidMount() {
-    const itemLength = this.props.items ? this.props.items.length : 0;
-    const totalPages = Math.floor(itemLength / this.props.limit);
+    const { items, limit } = this.props;
+    const itemLength = items ? items.length : 0;
+    const totalPages = Math.floor(itemLength / limit);
     // console.log(totalPages);
     this.setState({ totalPages });
   }
 
   render() {
+    const { url } = this.props;
     return (
       <div className="paginator">
         <Link
-          to={`${this.props.url}?page=`}
+          to={`${url}?page=`}
           className="paginator__previous"
         >
           Previous
         </Link>
         <Link
-          to={`${this.props.url}?page=`}
+          to={`${url}?page=`}
           className="paginator__more"
         >
           More

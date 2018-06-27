@@ -1,9 +1,9 @@
 import {
   FETCH_ITEMS,
   FETCH_SINGLE_ITEM
-} from './../types';
+} from '../types';
 
-export const topStoriesByIdReducer = (state={}, action) => {
+export const storiesByTypeReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_ITEMS:
       return {
@@ -15,7 +15,7 @@ export const topStoriesByIdReducer = (state={}, action) => {
   }
 };
 
-export const itemsReducer = (state={}, action) => {
+export const itemsReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_SINGLE_ITEM:
       return {
@@ -25,4 +25,4 @@ export const itemsReducer = (state={}, action) => {
     default:
       return state;
   }
-}
+};
