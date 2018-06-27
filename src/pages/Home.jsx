@@ -9,7 +9,8 @@ import './Home.scss';
 import StoryView from 'components/StoryView';
 import NavigationBar from 'components/NavigationBar';
 import Footer from 'components/Footer';
-import Stories from 'pages/Stories';
+import Stories from './Stories';
+import NotFound from './NotFound';
 
 type Props = {
   location: any
@@ -31,6 +32,7 @@ export default ({ location: { pathname } }: Props) => {
           {/* <Route path="/comments" component={Stories}/> */}
           <Route path="/jobs" component={Stories} />
           <Route path="/item/:itemId" component={StoryView} />
+          <Route path="/*" component={NotFound} />
         </Switch>
         <Footer />
       </div>
