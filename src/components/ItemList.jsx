@@ -12,11 +12,11 @@ type Props = {
 };
 
 const ItemList = ({ items }: Props) => (
-  <ul className="item__list">
-    {items && items.map((itemId, index) => (
-      <Item number={index + 1} itemId={itemId} key={itemId} />
+  <ol className="item__list">
+    {items && items.map(itemId => (
+      <Item itemId={itemId} key={itemId} />
     ))}
-  </ul>
+  </ol>
 );
 
 export default ItemList;
