@@ -8,5 +8,13 @@ export default {
     beststories: []
   },
   items: {},
-  loader: {}
+  loader: {},
+  pagination: {
+    topstories: 0,
+    askstories: 0,
+    showstories: 0,
+    jobstories: 0,
+    newstories: 0,
+    beststories: 0
+  }
 };

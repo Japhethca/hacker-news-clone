@@ -1,3 +1,4 @@
+// react related libraries
 import * as React from 'react';
 import { connect } from 'react-redux';
 
@@ -8,22 +9,31 @@ import Paginator from 'components/Paginator';
 // actions
 import handleFetchItems from 'actions/storiesActions';
 
+// thirdparty library
+import qs from 'qs';
+
 type Props = {
-  location: any,
+  location: {
+    search: string,
+    pathname: string
+  },
   story: any,
-  handleFetchItems: any
+  fetchItems: (x:string) => void,
+  totalPages: number
 };
 
 type State = {
-  limit: number
+  limit: number,
+  currentPage: number
 };
+
 class Stories extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      limit: 15
+      limit: 15,
+      currentPage: 1
     };
-    this.fetchStoryData = this.fetchStoryData.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +45,7 @@ class Stories extends React.Component<Props, State> {
   componentWillReceiveProps(nextProps) {
     const storyName = Stories.types[nextProps.location.pathname.slice(1)];
     this.fetchStoryData(storyName);
+    this.setState({ currentPage: this.getCurrentPage(nextProps.location.search) });
   }
 
   static get types() {
@@ -50,35 +61,63 @@ class Stories extends React.Component<Props, State> {
   }
 
   /**
+   * @param {String} search
+   * @memberof Stories
+   * @returns {Number} - current page
+   */
+  getCurrentPage(search) {
+    const currentPage = parseInt(
+      qs.parse(search, { ignoreQueryPrefix: true }).page,
+      10
+    ) || 1;
+    return currentPage;
+  }
+
+  /**
+   * @returns {Array} - list of items to be displayed
+   * @memberof Stories
+   */
+  getRenderedItems() {
+    const { story } = this.props;
+    const { limit, currentPage } = this.state;
+    const start = (limit * (currentPage - 1));
+    const finish = (limit * currentPage);
+    return story.items.slice(start, finish);
+  }
+
+  /**
    * handles fetching of items based on story type eg. topstories
-   * @author (Set the text for this tag by adding docthis.authorName to your settings file.)
    * @param {String} storyName
    * @memberof TopStories
    * @returns {Null} - d
    */
   fetchStoryData(storyName) {
-    const { story, handleFetchItems } = this.props;
-
+    const { story, fetchItems } = this.props;
     if (story.storyName !== storyName) {
-      handleFetchItems(storyName);
-    } else if (story.items.length < 1) {
-      handleFetchItems(storyName);
+      fetchItems(storyName);
+    }
+    if (story.items.length < 1) {
+      fetchItems(storyName);
     }
   }
 
+
   render() {
-    const { story } = this.props;
-    const { limit } = this.state;
+    const {
+      story: { items, totalPages },
+      location: { pathname },
+    } = this.props;
+    const { currentPage } = this.state;
     return (
       <div>
-        <ItemList items={story.items.slice(0, limit)} />
+        <ItemList items={this.getRenderedItems()} />
         {
-          story.items
+          items
           && (
           <Paginator
-            limit={15}
-            url={story.location}
-            items={story.items}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            url={pathname}
           />
           )
         }
@@ -87,10 +126,6 @@ class Stories extends React.Component<Props, State> {
   }
 }
 
-Stories.propsTypes = {
-
-};
-
 const mapStateToProps = (state, { location }) => {
   const storyName = Stories.types[location.pathname.slice(1)];
   return {
@@ -98,10 +133,11 @@ const mapStateToProps = (state, { location }) => {
       items: state.storyTypes[storyName],
       location: location.pathname,
       storyName,
+      totalPages: state.pagination[storyName]
     }
   };
 };
 
 export default connect(mapStateToProps, {
-  handleFetchItems
+  fetchItems: handleFetchItems
 })(Stories);

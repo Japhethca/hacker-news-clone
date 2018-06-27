@@ -18,6 +18,8 @@
 
   &__more {
     padding-left: .6rem;
-    border-left: 1px solid map-get($primary, grey)
+  }
+  &__show-separator {
+    border-right: 1px solid map-get($primary, grey)
   }
 }

@@ -5,17 +5,16 @@ import { Link } from 'react-router-dom';
 // styles
 import './Paginator.scss';
 
-
+// Paginator props
 type Props = {
-  items: any[],
-  limit: number,
+  currentPage: number,
+  totalPages: number,
   url: string
 }
 
+// Paginator states
 type State = {
-  totalPages: number,
-  more: number,
-  previous: number
+  currentPage: number,
 }
 
 
@@ -23,36 +22,73 @@ class Paginator extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      totalPages: 0,
-      more: 0,
-      previous: 0
+      currentPage: this.props.currentPage,
     };
   }
 
-  componentDidMount() {
-    const { items, limit } = this.props;
-    const itemLength = items ? items.length : 0;
-    const totalPages = Math.floor(itemLength / limit);
-    // console.log(totalPages);
-    this.setState({ totalPages });
+  componentWillReceiveProps(nextProps) {
+    const { currentPage } = this.props;
+
+    if (nextProps.currentPage !== currentPage) {
+      this.setState({
+        currentPage: nextProps.currentPage,
+      });
+    }
+  }
+
+  /**
+   * @returns {Number} - previous page
+   * @memberof Paginator
+   */
+  getPreviousPage() {
+    const { currentPage } = this.state;
+    return currentPage - 1;
+  }
+
+  /**
+   * @returns {Number} - next page
+   * @memberof Paginator
+   */
+  getNextPage() {
+    const { currentPage } = this.state;
+    return currentPage + 1;
+  }
+
+  /**
+   * @returns {Boolean} - returns true/false if separator is to be shown
+   * @memberof Paginator
+   */
+  showSeparator() {
+    const { totalPages } = this.props;
+    return this.getPreviousPage() >= 1 && this.getNextPage() <= totalPages;
   }
 
   render() {
-    const { url } = this.props;
+    const { url, totalPages } = this.props;
     return (
       <div className="paginator">
-        <Link
-          to={`${url}?page=`}
-          className="paginator__previous"
-        >
-          Previous
-        </Link>
-        <Link
-          to={`${url}?page=`}
-          className="paginator__more"
-        >
-          More
-        </Link>
+        {
+          this.getPreviousPage() >= 1
+          && (
+          <Link
+            to={`${url}?page=${this.getPreviousPage()}`}
+            className={`paginator__previous ${this.showSeparator(totalPages) && 'paginator__show-separator'}`}
+          >
+            Previous
+          </Link>
+          )
+        }
+        {
+          this.getNextPage() <= totalPages
+          && (
+          <Link
+            to={`${url}?page=${this.getNextPage()}`}
+            className="paginator__more"
+          >
+            More
+          </Link>
+          )
+        }
       </div>
     );
   }
