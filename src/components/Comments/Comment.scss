@@ -1,0 +1,51 @@
+@import "../../common/theme";
+
+.comment {
+  margin-top: 1rem;
+  font-size: 14pt;
+  text-overflow: ellipsis;
+  text-justify: inter-word;
+
+  &__meta {
+    color: map-get($primary, grey);
+    margin-bottom: .6rem;
+
+    &__author {
+      text-transform: capitalize;
+      padding-right: .6rem;
+      color: darken(map-get($primary, green), 20%);
+    }
+
+    &__date {
+
+    }
+  }
+
+  &__content {
+    a {
+      color: darken(map-get($primary, green), 25%)
+    }
+  }
+
+  &__toggle {
+    font-weight: bold;
+    font-size: larger;
+    background-color: transparent;
+    color: map-get($primary, grey);
+    border: 0;
+    padding: 0 .4rem 0 0 ;
+    outline: 0;
+  }
+
+  &__replies {
+    padding-left: 2rem;
+  }
+
+  &__show {
+    display: block;
+  }
+
+  &__hide {
+    display: none;
+  }
+}

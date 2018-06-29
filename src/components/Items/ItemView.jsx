@@ -1,7 +1,7 @@
 // react related libraries
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
 // other libs
 import htmlRender from 'react-render-html';
@@ -11,12 +11,14 @@ import urlParser from 'url-parse';
 // components
 import Loader from 'common/Loader/Loader';
 
+
 // styles
 import './ItemView.scss';
 
 // action & helpers
 import handleFetchItem from 'actions/itemsAction';
 import fromNow from 'helpers/fromNow';
+import CommentList from '../Comments/CommentList';
 import { ItemType } from '../../types';
 
 
@@ -71,14 +73,17 @@ class ItemView extends React.Component<Props> {
                   {` | ${fromNow(item.time)}`}
                 </span>
                 {' | '}
-                <Link to="#comments">
+                <Link to="#comment-list">
                   {`${item.kids ? item.kids.length : 0} `}
-                  Comments(s)
+                  Comment(s)
                 </Link>
               </div>
               <div className="item-view__content">
                 {item.text && htmlRender(item.text)}
               </div>
+              <React.Fragment>
+                {item.kids && <CommentList comments={item.kids} commentTag="comment-list" />}
+              </React.Fragment>
             </div>
           )
         }

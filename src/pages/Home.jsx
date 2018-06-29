@@ -26,7 +26,7 @@ export const Home = ({ location: { pathname } }: Props) => {
   return (
     <React.Fragment>
       <NavigationBar />
-      <div className="container home--bg-color">
+      <div className="container home--bg-color" id="top">
         <Switch>
           <Route path="/new" component={Stories} />
           <Route path="/top" component={Stories} />
