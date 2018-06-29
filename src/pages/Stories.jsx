@@ -2,32 +2,41 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+// thirdparty library
+import qs from 'qs';
+
+
 // components
-import ItemList from 'components/ItemList';
+import ItemList from 'components/Items/ItemList';
 import Paginator from 'components/Paginator';
+import DummyList from 'components/DummyList';
+
 
 // actions
 import handleFetchItems from 'actions/storiesActions';
 
-// thirdparty library
-import qs from 'qs';
 
-type Props = {
+type StoriesProps = {
   location: {
     search: string,
     pathname: string
   },
-  story: any,
+  story: {
+    items: number[],
+    location: string,
+    storyName: string,
+    totalPages: number
+  },
   fetchItems: (x:string) => void,
-  totalPages: number
 };
 
-type State = {
+
+type StoriesState = {
   limit: number,
   currentPage: number
 };
 
-class Stories extends React.Component<Props, State> {
+class Stories extends React.Component<StoriesProps, StoriesState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,8 +52,11 @@ class Stories extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { story } = this.props;
     const storyName = Stories.types[nextProps.location.pathname.slice(1)];
-    this.fetchStoryData(storyName);
+    if (nextProps.story.items !== story.items) {
+      this.fetchStoryData(storyName);
+    }
     this.setState({ currentPage: this.getCurrentPage(nextProps.location.search) });
   }
 
@@ -65,7 +77,7 @@ class Stories extends React.Component<Props, State> {
    * @memberof Stories
    * @returns {Number} - current page
    */
-  getCurrentPage(search) {
+  getCurrentPage(search: string) {
     const currentPage = parseInt(
       qs.parse(search, { ignoreQueryPrefix: true }).page,
       10
@@ -78,10 +90,10 @@ class Stories extends React.Component<Props, State> {
    * @memberof Stories
    */
   getRenderedItems() {
-    const { story } = this.props;
-    const { limit, currentPage } = this.state;
-    const start = (limit * (currentPage - 1));
-    const finish = (limit * currentPage);
+    const { story } = this.props,
+      { limit, currentPage } = this.state,
+      start = (limit * (currentPage - 1)),
+      finish = (limit * currentPage);
     return story.items.slice(start, finish);
   }
 
@@ -107,21 +119,22 @@ class Stories extends React.Component<Props, State> {
       story: { items, totalPages },
       location: { pathname },
     } = this.props;
-    const { currentPage } = this.state;
+    const { currentPage, limit } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <ItemList items={this.getRenderedItems()} />
         {
-          items
-          && (
-          <Paginator
-            currentPage={currentPage}
-            totalPages={totalPages}
-            url={pathname}
-          />
-          )
+          items.length
+            ? (
+              <Paginator
+                currentPage={currentPage}
+                totalPages={totalPages}
+                url={pathname}
+              />
+            )
+            : <DummyList count={limit} />
         }
-      </div>
+      </React.Fragment>
     );
   }
 }

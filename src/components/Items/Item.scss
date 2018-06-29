@@ -1,4 +1,4 @@
-@import '../common/theme';
+@import '../../common/theme';
 
 $title-color: map-get($primary , black);
 $title-link-hover: darken(map-get($primary, green), 20%);
@@ -17,6 +17,7 @@ $meta-items-color: map-get($primary, grey);
   &__link {
     color: $title-color;
     font-size: 1.2rem;
+    cursor: pointer;
 
     &:hover {
       color: $title-link-hover;

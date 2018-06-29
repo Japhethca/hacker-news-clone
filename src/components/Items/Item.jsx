@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // third party libraries
-import moment from 'moment';
 import urlParser from 'url-parse';
 
 // styles
@@ -12,14 +11,15 @@ import './Item.scss';
 
 // actions
 import handleFetchItem from 'actions/itemsAction';
-
-// components
 import Loader from 'common/Loader/Loader';
+import fromNow from 'helpers/fromNow';
+import { ItemType } from '../../types';
 
+// @flow
 type Props = {
-  handleFetchItem: any,
+  fetchItem: (number) => void,
   itemId: number,
-  item: any,
+  item: ItemType,
   isloading: boolean
 };
 
@@ -39,10 +39,10 @@ class Item extends React.Component<Props> {
    * @returns {none} - returns none
    */
   componentDidMount() {
-    const { item, handleFetchItem, itemId } = this.props;
+    const { item, fetchItem, itemId } = this.props;
 
     if (!item.id) {
-      handleFetchItem(itemId);
+      fetchItem(itemId);
     }
   }
 
@@ -63,18 +63,12 @@ class Item extends React.Component<Props> {
    */
   render() {
     const { item, isloading } = this.props;
-    if (!item && !isloading) {
-      return (
-        <div className="hidden" />
-      );
-    }
-
     return (
       <li className="item" id={item.id}>
         {
           isloading
             ? <Loader />
-            : (
+            : item.title && (
               <div className="item__details">
                 {
             item.url
@@ -89,10 +83,7 @@ class Item extends React.Component<Props> {
               )
               : (
                 <Link
-                  to={{
-                    pathname: `/item/${item.id}`,
-                    state: item
-                  }}
+                  to={`/item/${item.id}`}
                   className="item__link"
                 >
                   {item.title}
@@ -104,7 +95,7 @@ class Item extends React.Component<Props> {
                     {`${item.score} `}
                     points by
                     {` ${item.by} `}
-                    {moment.unix(item.time).fromNow()}
+                    {fromNow(item.time)}
                   </span>
                   {' | '}
                   <button
@@ -136,4 +127,4 @@ const mapStateToProps = (state, { itemId }) => ({
   isloading: state.loader[itemId] || false
 });
 
-export default connect(mapStateToProps, { handleFetchItem })(Item);
+export default connect(mapStateToProps, { fetchItem: handleFetchItem })(Item);

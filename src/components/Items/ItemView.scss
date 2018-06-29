@@ -1,0 +1,48 @@
+@import '../../common/theme';
+
+$meta-n-link-color: map-get($primary, grey);
+
+.item-view {
+  margin: 0 1rem;
+
+  &__loader {
+    text-align: center;
+  }
+
+  &__link {
+    color: $meta-n-link-color;
+    padding-left: .4rem;
+  }
+
+  &__title {
+    margin-top: 0;
+    padding-top: 1rem;
+
+    a {
+      color: map-get($primary, black)
+    }
+  }
+
+  &__content {
+    font-size: 14pt;
+    text-align: justify;
+    text-justify: inter-word;
+
+    a {
+      color: darken(map-get($primary, green), 20%);
+    }
+  }
+
+  &__meta {
+    color: $meta-n-link-color;
+    padding-bottom: 1rem;
+
+    a {
+      color: $meta-n-link-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
