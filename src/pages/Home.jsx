@@ -6,22 +6,25 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import './Home.scss';
 
 // components
-import StoryView from 'components/StoryView';
+import ItemView from 'components/Items/ItemView';
 import NavigationBar from 'components/NavigationBar';
 import Footer from 'components/Footer';
 import Stories from './Stories';
 import NotFound from './NotFound';
 
 type Props = {
-  location: any
+  location: {
+    pathname: string
+  }
 }
-export default ({ location: { pathname } }: Props) => {
+
+export const Home = ({ location: { pathname } }: Props) => {
   if (pathname === '/') {
     return <Redirect to="top" />;
   }
 
   return (
-    <div>
+    <React.Fragment>
       <NavigationBar />
       <div className="container home--bg-color">
         <Switch>
@@ -31,11 +34,14 @@ export default ({ location: { pathname } }: Props) => {
           <Route path="/show" component={Stories} />
           {/* <Route path="/comments" component={Stories}/> */}
           <Route path="/jobs" component={Stories} />
-          <Route path="/item/:itemId" component={StoryView} />
+          <Route path="/item/:itemId" component={ItemView} />
           <Route path="/*" component={NotFound} />
         </Switch>
         <Footer />
       </div>
-    </div>
+    </React.Fragment>
   );
 };
+
+
+export default Home;

@@ -7,8 +7,8 @@ dotenv.config();
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  devtool: "inline-source-map",
-  entry: "./src/Index.jsx",
+  devtool: 'inline-source-map',
+  entry: './src/Index.jsx',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -19,15 +19,16 @@ module.exports = {
   },
   module: {
     rules: [{
-        test: /\.(jsx|js)$/,
-        use: 'babel-loader'
-      },
-      {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      }
+      test: /\.(jsx|js)$/,
+      use: 'babel-loader'
+    },
+    {
+      test: /\.scss$/,
+      use: ['style-loader', 'css-loader', 'sass-loader']
+    }
     ]
   },
+
   devServer: {
     contentBase: './dist',
     compress: true,

@@ -1,0 +1,24 @@
+.dummy-list {
+  margin: 0;
+  list-style-type: none;
+  padding-top: 1rem;
+
+  &__item {
+    padding-top: 2rem;
+    background-color: #DADAD8;
+    margin-top: 5px;
+    margin-right: 10px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  &__item-title {
+
+  }
+
+  &__item-meta {
+
+  }
+}

@@ -22,7 +22,7 @@ class Paginator extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: this.props.currentPage,
+      currentPage: props.currentPage,
     };
   }
 
