@@ -44,7 +44,7 @@ class UserDetail extends React.Component<UserDetailProps> {
     const { user } = this.state;
     return (
       <table className="user-details">
-        {user &&
+        {user.id &&
           <tbody>
             <tr>
               <td>User</td>
