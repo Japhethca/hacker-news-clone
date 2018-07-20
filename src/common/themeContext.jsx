@@ -6,9 +6,9 @@ export const ThemeConsumer = themeContext.Consumer
 
 const themes = [
   {
-    bg: '#000000',
+    bg: '#EE6F2E',
     fg: '#ffff',
-    link: '#85BE39',
+    link: '#000000',
     meta: '#6f6f6f',
     bodyBG: '#E8E8E8'
   },
@@ -20,18 +20,18 @@ const themes = [
     bodyBG: '#E8E8E8'
   },
   {
-    bg: '#EE6F2E',
-    fg: '#ffff',
-    link: '#000000',
-    meta: '#6f6f6f',
-    bodyBG: '#E8E8E8'
-  },
-  {
-    bg: '#000000',
+    bg: '#616161',
     fg: '#ffff',
     link: '#ffff',
     meta: '#6f6f6f',
     bodyBG: '#000000'
+  },
+  {
+    bg: '#000000',
+    fg: '#ffff',
+    link: '#85BE39',
+    meta: '#6f6f6f',
+    bodyBG: '#E8E8E8'
   }
 ];
 
