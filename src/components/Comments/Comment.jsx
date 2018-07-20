@@ -88,7 +88,7 @@ class Comment extends React.Component<CommentProps, CommentState> {
             ]
               </button>
               <span className="comment__meta__author">
-                <Link to={`/user/${comment.by}`}>
+                <Link to={`/user/${comment.by}`} className="link">
                   {comment.by}
                 </Link>
               </span>
