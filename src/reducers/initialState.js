@@ -16,5 +16,6 @@ export default {
     jobstories: 0,
     newstories: 0,
     beststories: 0
-  }
+  },
+  users: {}
 };

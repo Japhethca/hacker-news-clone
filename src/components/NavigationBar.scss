@@ -52,6 +52,12 @@ $active-link: lighten(map-get($primary, green), 30%);
     }
   }
 
+  .theme-toggle {
+    margin-left: auto;
+    padding-right: .6rem;
+    cursor: pointer;
+  }
+
   @media (min-width: 320px) and (max-width: 480px) {
     & {
       width: 100%;

@@ -9,8 +9,10 @@ import './Home.scss';
 import ItemView from 'components/Items/ItemView';
 import NavigationBar from 'components/NavigationBar';
 import Footer from 'components/Footer';
+import UserDetail from 'components/UserDetail';
 import Stories from './Stories';
 import NotFound from './NotFound';
+import { ThemeProvider } from '../common/themeContext';
 
 type Props = {
   location: {
@@ -24,7 +26,7 @@ export const Home = ({ location: { pathname } }: Props) => {
   }
 
   return (
-    <React.Fragment>
+    <ThemeProvider>
       <NavigationBar />
       <div className="container home--bg-color" id="top">
         <Switch>
@@ -32,14 +34,14 @@ export const Home = ({ location: { pathname } }: Props) => {
           <Route path="/top" component={Stories} />
           <Route path="/ask" component={Stories} />
           <Route path="/show" component={Stories} />
-          {/* <Route path="/comments" component={Stories}/> */}
           <Route path="/jobs" component={Stories} />
           <Route path="/item/:itemId" component={ItemView} />
+          <Route path="/user/:username" component={UserDetail} />
           <Route path="/*" component={NotFound} />
         </Switch>
         <Footer />
       </div>
-    </React.Fragment>
+    </ThemeProvider>
   );
 };
 
