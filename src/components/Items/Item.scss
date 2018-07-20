@@ -12,6 +12,14 @@ $meta-items-color: map-get($primary, grey);
   &__meta {
     color: $meta-items-color;
     font-size: 1.2rem;
+
+    &__user {
+      color: $meta-items-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   &__link {
@@ -20,7 +28,7 @@ $meta-items-color: map-get($primary, grey);
     cursor: pointer;
 
     &:hover {
-      color: $title-link-hover;
+      text-decoration: underline;
     }
 
     &:visited {

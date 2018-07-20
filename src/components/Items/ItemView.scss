@@ -29,7 +29,8 @@ $meta-n-link-color: map-get($primary, grey);
     text-justify: inter-word;
 
     a {
-      color: darken(map-get($primary, green), 20%);
+      color: #000000;
+      text-decoration: underline;
     }
   }
 

@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 // third party libraries
 import urlParser from 'url-parse';
+import tc from 'tinycolor2';
+import { ThemeConsumer } from '../../common/themeContext';
 
 // styles
 import './Item.scss';
@@ -64,60 +66,70 @@ class Item extends React.Component<Props> {
   render() {
     const { item, isloading } = this.props;
     return (
-      <li className="item" id={item.id}>
-        {
-          isloading
-            ? <Loader />
-            : item.title && (
-              <div className="item__details">
-                {
-            item.url
-              ? (
-                <a className="item__link" href={item.url}>
-                  {item.title}
-                  <span className="item__link__url">
-                    &nbsp;
-                    {`(${urlParser(item.url).host})`}
-                  </span>
-                </a>
-              )
-              : (
-                <Link
-                  to={`/item/${item.id}`}
-                  className="item__link"
-                >
-                  {item.title}
-                </Link>
-              )
-          }
-                <div className="item__meta">
-                  <span>
-                    {`${item.score} `}
-                    points by
-                    {` ${item.by} `}
-                    {fromNow(item.time)}
-                  </span>
-                  {' | '}
-                  <button
-                    type="button"
-                    className="hide-btn"
-                    onClick={this.hideItem}
-                  >
-                  hide
-                  </button>
-                  {' | '}
-                  <Link
-                    className="item__comments"
-                    to={`item/${item.id}/comments`}
-                  >
-                    {item.kids ? item.kids.length : 0}
-                    &nbsp;comment(s)
-                  </Link>
-                </div>
-              </div>
-            )
-        }
-      </li>
+      <ThemeConsumer>
+        {({theme}) => (
+          <li className="item" id={item.id}>
+            {
+              isloading
+                ? <Loader />
+                : item.title && (
+                  <div className="item__details">
+                    {
+                      item.url
+                        ? (
+                          <a
+                            className="item__link"
+                            style={{color: tc(theme.link).darken(50)}}
+                            href={item.url}>
+                            {item.title}
+                            <span className="item__link__url">
+                            &nbsp;
+                              {`(${urlParser(item.url).host})`}
+                            </span>
+                          </a>
+                        )
+                        : (
+                          <Link
+                            style={{color: tc(theme.link).darken(50)}}
+                            to={`/item/${item.id}`}
+                            className="item__link"
+                          >
+                            {item.title}
+                          </Link>
+                        )
+                    }
+                    <div className="item__meta">
+                      <span>
+                        {`${item.score} `}
+                        points by
+                        <Link to={`/user/${item.by}`} className="item__meta__user">
+                          {` ${item.by} `}
+                        </Link>
+                        {fromNow(item.time)}
+                      </span>
+                      {' | '}
+                      <button
+                        type="button"
+                        className="hide-btn"
+                        onClick={this.hideItem}
+                      >
+                      hide
+                      </button>
+                      {' | '}
+                      <Link
+                        className="item__comments"
+                        to={`item/${item.id}/comments`}
+                      >
+                        {item.kids ? item.kids.length : 0}
+                        &nbsp;comment(s)
+                      </Link>
+                    </div>
+                  </div>
+                )
+            }
+          </li>
+        )}
+      </ThemeConsumer>
     );
   }
 }

@@ -6,8 +6,11 @@
   margin: 1rem auto 0 auto;
   border-top: 1px solid map-get($primary, black);
   text-align: center;
-
   a {
-    color: darken(map-get($primary, green), 20%);
+    color: #000000;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

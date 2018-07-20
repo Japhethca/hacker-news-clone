@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import htmlRender from 'react-render-html';
 
@@ -38,14 +39,18 @@ class Comment extends React.Component<CommentProps, CommentState> {
 
   componentDidMount() {
     const { comment, commentId, fetchItem } = this.props;
+
     if (!comment) {
       fetchItem(commentId);
+    } else {
+      this.setState({comment})
     }
   }
 
 
   componentWillReceiveProps(nextProps) {
     const { comment } = this.props;
+
     if (comment !== nextProps.comment) {
       this.setState({ comment: nextProps.comment });
     }
@@ -67,6 +72,7 @@ class Comment extends React.Component<CommentProps, CommentState> {
   render() {
     const { isLoading } = this.props;
     const { comment, isHidden } = this.state;
+
     return (
       <div className="comment">
         {isLoading ? <Loader />
@@ -82,7 +88,9 @@ class Comment extends React.Component<CommentProps, CommentState> {
             ]
               </button>
               <span className="comment__meta__author">
-                {comment.by}
+                <Link to={`/user/${comment.by}`} className="link">
+                  {comment.by}
+                </Link>
               </span>
               <span className="comment__meta__date">
                 {fromNow(comment.time)}

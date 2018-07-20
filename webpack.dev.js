@@ -8,7 +8,7 @@ dotenv.config();
 module.exports = {
   mode: process.env.NODE_ENV,
   devtool: 'inline-source-map',
-  entry: './src/Index.jsx',
+  entry: ['regenerator-runtime/runtime','./src/Index.jsx'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js'

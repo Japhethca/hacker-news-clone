@@ -13,17 +13,19 @@
     &__author {
       text-transform: capitalize;
       padding-right: .6rem;
-      color: darken(map-get($primary, green), 20%);
-    }
+      font-weight: bolder;
 
-    &__date {
-
+      .link {
+        color: #000000;
+        text-decoration: none;
+      }
     }
   }
 
   &__content {
     a {
-      color: darken(map-get($primary, green), 25%)
+      color: #000000;
+      text-decoration: underline;
     }
   }
 

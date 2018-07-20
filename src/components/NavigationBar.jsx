@@ -1,54 +1,48 @@
 // react libraries
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import tc from 'tinycolor2';
+
+// others
+import { ThemeConsumer } from '../common/themeContext';
 // styles
 import './NavigationBar.scss';
 
+
 class NavigationBar extends Component {
   render() {
+    const links = ['new', 'show', 'ask', 'jobs']
     return (
-      <div className="container">
-        <nav className="nav">
-          <NavLink to="/top" className="nav__brand">
-            <span className="nav__brand-name">
-              React HN
-            </span>
-          </NavLink>
-          <ul className="nav__menu">
-            <li className="nav__menu-item">
-              <NavLink activeClassName="active__link--color" to="/new">
-                new
+      <ThemeConsumer>
+        {({theme, changeTheme}) => (
+          <div className="container">
+            <nav className="nav" style={{backgroundColor: theme.bg}}>
+              <NavLink to="/top" className="nav__brand">
+                <span className="nav__brand-name">
+                  React HN
+                </span>
               </NavLink>
-
-            </li>
-            <li className="nav__menu-item">
-              <NavLink activeClassName="active__link--color" to="/top">
-                top
-              </NavLink>
-            </li>
-            <li className="nav__menu-item">
-              <NavLink activeClassName="active__link--color" to="/show">
-                show
-              </NavLink>
-            </li>
-            <li className="nav__menu-item">
-              <NavLink activeClassName="active__link--color" to="/comments">
-                comments
-              </NavLink>
-            </li>
-            <li className="nav__menu-item">
-              <NavLink activeClassName="active__link--color" to="/ask">
-                ask
-              </NavLink>
-            </li>
-            <li className="nav__menu-item">
-              <NavLink activeClassName="active__link--color" to="/jobs">
-                jobs
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </div>
+              <ul className="nav__menu">
+                {links.map(link => (
+                  <li className="nav__menu-item" key={link} style={{borderLeftColor: `${theme.link}`}}>
+                    <NavLink
+                      style={{color: theme.link}}
+                      activeStyle={{color: tc(theme.link).lighten(25)}}
+                      to={`/${link}`}>
+                      {link}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+              <span
+                className="theme-toggle"
+                onClick={() => changeTheme()}
+                style={{color: "white"}}>Change Theme</span>
+            </nav>
+          </div>
+        )}
+      </ThemeConsumer>
     );
   }
 }
